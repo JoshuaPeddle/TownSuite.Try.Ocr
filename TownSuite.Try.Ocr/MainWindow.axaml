@@ -1,0 +1,16 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="TownSuite.Try.Ocr.MainWindow"
+        Title="TownSuite.Try.Ocr">
+    <Grid>
+        <StackPanel Margin="10">
+            <Button Content="Open File" Click="OpenFile_Click"/>
+            <TextBox Name="ImagePathTextBox" Margin="0,10,0,0"/>
+            <Button Content="Submit" Click="Submit_Click"/>
+            <TextBlock Name="OcrOutput" Margin="10" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        </StackPanel>
+    </Grid>
+</Window>
