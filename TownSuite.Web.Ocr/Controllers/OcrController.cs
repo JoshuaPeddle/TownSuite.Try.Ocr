@@ -1,5 +1,6 @@
 using System.Net;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tesseract;
 
@@ -18,6 +19,7 @@ public class OcrController : ControllerBase
         _settings = settings;
     }
 
+    [Authorize(Policy = "ValidAccessToken")]
     [HttpPost()]
     public async Task<string> Post()
     {
