@@ -43,6 +43,7 @@ builder.Services.AddAuthorization(options =>
     options.FallbackPolicy = options.DefaultPolicy;
 });
 
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -59,4 +60,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapHealthChecks("/healthz").AllowAnonymous();
 app.Run();
