@@ -27,6 +27,7 @@ public class OcrController : ControllerBase
         await using var fstream = new FileStream(path, FileMode.Create);
         await Request.Body.CopyToAsync(fstream);
         await fstream.FlushAsync();
+        fstream.Close();
         string output = ProcessImage(path);
 
         try
@@ -46,7 +47,23 @@ public class OcrController : ControllerBase
         using var img = Pix.LoadFromFile(imagePath);
         using var page = engine.Process(img);
         var ocrText = page.GetText();
+        
+        var sb = new StringBuilder();
+        StringReader strReader = new StringReader(ocrText);
+        while(true)
+        {
+            string line = strReader.ReadLine();
+            if(!string.IsNullOrWhiteSpace(line))
+            {
+                sb.AppendLine(line);
+            }
 
-        return ocrText;
+            if (line == null)
+            {
+                break;
+            }
+        }
+        
+        return sb.ToString();
     }
 }
