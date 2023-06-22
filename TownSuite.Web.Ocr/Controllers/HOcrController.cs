@@ -8,12 +8,12 @@ namespace TownSuite.Web.Ocr.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class OcrController : ControllerBase
+public class HOcrController : ControllerBase
 {
-    private readonly ILogger<OcrController> _logger;
+    private readonly ILogger<HOcrController> _logger;
     private readonly Settings _settings;
 
-    public OcrController(ILogger<OcrController> logger, Settings settings)
+    public HOcrController(ILogger<HOcrController> logger, Settings settings)
     {
         _logger = logger;
         _settings = settings;
@@ -24,6 +24,6 @@ public class OcrController : ControllerBase
     public async Task<string> Post()
     {
         var processor = new ImageProcessing(_settings);
-        return await processor.GetText(Request.Body);
+        return await processor.GetText(Request.Body, "hocr");
     }
 }
