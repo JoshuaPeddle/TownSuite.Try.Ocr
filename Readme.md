@@ -69,6 +69,13 @@ services:
         # Do not use the default dev cert in production.   Map a volume and use a different cert.
         ASPNETCORE_Kestrel__Certificates__Default__Password: "A_W3AK_PLACEHOLDER_DEV_PASSWORD"
         ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/aspnetapp.pfx"
+        Settings__TessDataFolder: "./tessdata"
+        Settings__TessLanguage: "eng"
+        JWT__ValidAudience: "https://localhost:7169"
+        JWT__ValidIssuer: "https://localhost:7169"
+        JWT__Secret: "PLACEHOLDER_PLACEHOLDER_PLACEHOLDER_PLACEHOLDER_PLACEHOLDER_PLACEHOLDER"
+        JWT__ValidInMinutes: 525960
+        JWT__RefreshTokenValidInMinutes: 578556
 ```
 
 Run it with:
