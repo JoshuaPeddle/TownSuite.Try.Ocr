@@ -7,5 +7,5 @@ GITHASH=`cat build/githash.txt`
 
 # https://github.com/google/go-containerregistry/blob/main/cmd/crane/doc/crane.md
 crane push build/ocr.tar townsuite/ocr:latest --insecure
-crane push build/ocr.tar townsuite/ocr:${VERSION}-${GITHASH} --insecure
+crane push build/ocr.tar townsuite/ocr:$VERSION-$GITHASH --insecure
 
