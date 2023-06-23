@@ -2,6 +2,7 @@ using System.Net;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 using Tesseract;
 
 namespace TownSuite.Web.Ocr.Controllers;
@@ -23,7 +24,11 @@ public class OcrController : ControllerBase
     [HttpPost()]
     public async Task<string> Post()
     {
+        StringValues ocrType = "basic";
+        Request.Headers.TryGetValue("uzn-file", out var uzn);
+        Request.Headers.TryGetValue("ocr-type", out ocrType);
+        
         var processor = new ImageProcessing(_settings);
-        return await processor.GetText(Request.Body);
+        return await processor.GetText(Request.Body, ocrType, uzn);
     }
 }
