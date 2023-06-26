@@ -5,7 +5,7 @@ RUN apt update && apt install apt-transport-https -y \
     && apt update -oAcquire::AllowInsecureRepositories=true \
     && apt install notesalexp-keyring -y --allow-unauthenticated \
     && apt update \ 
-    && apt install tesseract-ocr libleptonica-dev libtesseract5 --allow-unauthenticated -y \
+    && apt install libgdiplus libc6-dev tesseract-ocr libleptonica-dev libtesseract5 --allow-unauthenticated -y \
     && rm -rf /tmp/* \
     && apt-get purge -y --auto-remove wget \
     && apt-get clean \
@@ -33,7 +33,10 @@ COPY --from=build /app/certs .
 RUN mkdir -p x64 \
     && mkdir -p tessdata \
     && cd x64 \
-    && ln -s /usr/lib/x86_64-linux-gnu/libleptonica.so libleptonica-1.82.0.so \
-    && ln -s /usr/lib/x86_64-linux-gnu/libtesseract.so.5.0.3 libtesseract50.so
+    && ln -s /usr/lib/x86_64-linux-gnu/liblept.so.5.0.4 libleptonica-1.82.0.so \
+    && ln -s /usr/lib/x86_64-linux-gnu/libtesseract.so.5.0.3 libtesseract50.so \
+    && ln -s /usr/lib/x86_64-linux-gnu/libtesseract.so.5.0.3 tesseract50.so
 
 ENTRYPOINT ["dotnet", "TownSuite.Web.Ocr.dll"]
+
+# ln -s /usr/lib/x86_64-linux-gnu/libtesseract.so.5.0.3 tesseract50.so

@@ -4,7 +4,7 @@ set -u # exit on using unset variable
 
 cwd=`pwd`
 
-docker build -f TownSuite.Web.Ocr/Dockerfile --progress plain -t townsuite/ocr --rm=true .
+docker build -f TownSuite.Web.Ocr/Dockerfile --progress plain -t townsuite/ocr .
 mkdir -p build
 
 docker save townsuite/ocr > ./build/ocr.tar
