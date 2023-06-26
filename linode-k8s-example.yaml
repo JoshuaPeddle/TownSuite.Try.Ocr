@@ -6,6 +6,21 @@ metadata:
   creationTimestamp: null
   name: ts-ocr-ns
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ts-ocr-config
+data:
+  JWT__ValidAudience: "https://PLACEHOLDER"
+  JWT__ValidIssuer: "https://PLACEHOLDER"
+  JWT__Secret: "PLACEHOLDER_PLACEHOLDER_PLACEHOLDER_PLACEHOLDER_PLACEHOLDER_PLACEHOLDER"
+  JWT__ValidInMinutes: 525960
+  JWT__RefreshTokenValidInMinutes: 578556
+  Settings__TessDataFolder: "./tessdata"
+  Settings__ValidAudience: "eng"
+  ASPNETCORE_Kestrel__Certificates__Default__Password: "A_W3AK_PLACEHOLDER_DEV_PASSWORD"
+  ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/aspnetapp.pfx"
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
