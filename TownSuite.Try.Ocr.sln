@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TownSuite.Try.Ocr", "TownSu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TownSuite.Web.Ocr", "TownSuite.Web.Ocr\TownSuite.Web.Ocr.csproj", "{BEDEF3F6-FFAE-4EC7-A1DE-6FCC5C9547D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TownSuite.OcrTests", "TownSuite.OcrTests\TownSuite.OcrTests.csproj", "{9CD15741-CAD9-45B9-9558-6DD821664FC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{BEDEF3F6-FFAE-4EC7-A1DE-6FCC5C9547D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEDEF3F6-FFAE-4EC7-A1DE-6FCC5C9547D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEDEF3F6-FFAE-4EC7-A1DE-6FCC5C9547D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CD15741-CAD9-45B9-9558-6DD821664FC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CD15741-CAD9-45B9-9558-6DD821664FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CD15741-CAD9-45B9-9558-6DD821664FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CD15741-CAD9-45B9-9558-6DD821664FC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
