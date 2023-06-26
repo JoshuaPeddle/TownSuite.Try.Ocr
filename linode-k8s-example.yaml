@@ -21,6 +21,7 @@ data:
   Settings__ValidAudience: "eng"
   ASPNETCORE_Kestrel__Certificates__Default__Password: "A_W3AK_PLACEHOLDER_DEV_PASSWORD"
   ASPNETCORE_Kestrel__Certificates__Default__Path: "/app/aspnetapp.pfx"
+  ASPNETCORE_URLS: "https://+:443;http://+:80"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -40,6 +41,57 @@ spec:
       namespace: ts-ocr-ns
     spec:
       containers:
+      - env:
+        - name: JWT__ValidAudience
+          valueFrom:
+            configMapKeyRef:
+              key: JWT__ValidAudience
+              name: ts-ocr-config
+        - name: JWT__ValidIssuer
+          valueFrom:
+            configMapKeyRef:
+              key: JWT__ValidIssuer
+              name: ts-ocr-config
+        - name: JWT__Secret
+          valueFrom:
+            configMapKeyRef:
+              key: JWT__Secret
+              name: ts-ocr-config
+        - name: JWT__ValidInMinutes
+          valueFrom:
+            configMapKeyRef:
+              key: JWT__ValidInMinutes
+              name: ts-ocr-config
+        - name: JWT__RefreshTokenValidInMinutes
+          valueFrom:
+            configMapKeyRef:
+              key: JWT__RefreshTokenValidInMinutes
+              name: ts-ocr-config
+        - name: Settings__TessDataFolder
+          valueFrom:
+            configMapKeyRef:
+              key: Settings__TessDataFolder
+              name: ts-ocr-config
+        - name: Settings__ValidAudience
+          valueFrom:
+            configMapKeyRef:
+              key: Settings__ValidAudience
+              name: ts-ocr-config
+        - name: ASPNETCORE_URLS
+          valueFrom:
+            configMapKeyRef:
+              key: ASPNETCORE_URLS
+              name: ts-ocr-config
+        - name: ASPNETCORE_Kestrel__Certificates__Default__Path
+          valueFrom:
+            configMapKeyRef:
+              key: ASPNETCORE_Kestrel__Certificates__Default__Path
+              name: ts-ocr-config
+        - name: ASPNETCORE_Kestrel__Certificates__Default__Password
+          valueFrom:
+            configMapKeyRef:
+              key: ASPNETCORE_Kestrel__Certificates__Default__Password
+              name: ts-ocr-config
       - name: ocr
         image: townsuite/ocr:latest
         ports:
