@@ -86,6 +86,6 @@ docker-compose up
 
 # Environment variable note
 Note: For environment variables, on Windows you should use :; on non-Windows, use __ (double underscore).
-```
+
 
 
