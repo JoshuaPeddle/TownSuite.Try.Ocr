@@ -49,8 +49,8 @@ RUN groupadd \
         --uid=$APP_UID \
         --gid=$APP_UID \
         --create-home \
-        app \
-RUN chown $APP_UID /app/certs/aspnetapp.pfx
+        app
+RUN chown $APP_UID /app/aspnetapp.pfx
 USER $APP_UID
 ENTRYPOINT ["dotnet", "TownSuite.Web.Ocr.dll"]
 
