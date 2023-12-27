@@ -41,7 +41,7 @@ RUN mkdir -p x64 \
 ENV APP_UID=1654 \
         # Configure web servers to bind to port 8080 when present
         ASPNETCORE_HTTP_PORTS=8080 \
-        ASPNETCORE_URLS=http://+:8080
+        ASPNETCORE_URLS=https://+:8443;http://+:8080
 RUN groupadd \
         --gid=$APP_UID \
         app \
@@ -49,7 +49,8 @@ RUN groupadd \
         --uid=$APP_UID \
         --gid=$APP_UID \
         --create-home \
-        app
+        app \
+RUN chown $APP_UID /app/certs/aspnetapp.pfx
 USER $APP_UID
 ENTRYPOINT ["dotnet", "TownSuite.Web.Ocr.dll"]
 
