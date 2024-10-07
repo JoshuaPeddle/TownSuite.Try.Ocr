@@ -26,7 +26,7 @@ ln -s /usr/lib/x86_64-linux-gnu/libtesseract.so.5.0.3 libtesseract50.so
 cd ..
 
 echo "download trained language models from https://github.com/tesseract-ocr/tessdata_fast"
-```z
+```
 
 mac
 
