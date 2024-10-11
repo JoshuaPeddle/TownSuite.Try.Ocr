@@ -16,15 +16,20 @@ public class Tests
         };
     }
 
-    [Test]
-    public async Task BasicPlainTextTest()
+    [TestCase("test.jpg", "test.txt")]
+    [TestCase("crankshaft.jpg", "crankshaft.txt")]
+    [TestCase("abbott2.jpg", "abbott2.txt")]
+    public async Task ParameterizedOcrTest(string imageFileName, string expectedTextFileName)
     {
-        const string expected = "Hello World\r\n";
-        await using var fs = new FileStream("test-images/test.jpg", FileMode.Open);
+        var imagePath = Path.Combine("test-images", imageFileName);
+        var expectedTextPath = Path.Combine("expected-texts", expectedTextFileName);
+
+        var expected = await File.ReadAllTextAsync(expectedTextPath);
+        await using var fs = new FileStream(imagePath, FileMode.Open);
         var processor = new ImageProcessing(_settings);
         var result = await processor.GetText(fs, ocrType: "basic", uzn: null);
 
-        Assert.That(result, Is.EqualTo(expected));
+        Assert.That(result.Trim(), Is.EqualTo(expected.Trim()));
     }
 
     [Test]

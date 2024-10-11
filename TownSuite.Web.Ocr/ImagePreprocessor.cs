@@ -24,7 +24,7 @@ namespace TownSuite.Web.Ocr
 
         private static Pix Denoise(Pix image)
         {
-            if (image.Depth == 32 || image.Depth == 8)
+            if (image.Depth == 32 || image.Depth == 8 && (image.Width > 1000 || image.Height > 1000))
             {
                 try
                 {

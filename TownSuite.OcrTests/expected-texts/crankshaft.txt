@@ -1,0 +1,9 @@
+CRANKSHAFT FORCES
+Each time combustion occurs, the force deflects the
+crankshaft as it transfers torque to the output shaft.
+This deflection occurs in two ways, to bend the shaft
+sideways and to twist the shaft in torsion. The crank-
+shaft must be rigid enough to keep the deflection forces
+to a minimum.
+Crankshaft deflections are directly related to oper-
+ating roughness of an engine. When back-and-forth
