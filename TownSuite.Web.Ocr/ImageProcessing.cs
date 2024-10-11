@@ -1,3 +1,4 @@
+using System.IO;
 using System.Text;
 using Tesseract;
 
@@ -14,38 +15,33 @@ public class ImageProcessing
 
     public async Task<string> GetText(Stream inputstream, string ocrType, string uzn)
     {
-        string basePath = System.IO.Path.Combine(Settings.GetTempFolder(), Guid.NewGuid().ToString());
-        string path = $"{basePath}.image";
-        string uznFile = $"{path}.uzn";
-        await using var fstream = new FileStream(path, FileMode.Create);
-        await inputstream.CopyToAsync(fstream);
-        await fstream.FlushAsync();
-        fstream.Close();
-
-        if (!string.IsNullOrWhiteSpace(uzn))
-        {
-            byte[] uznData = Convert.FromBase64String(uzn);
-            string uznString = Encoding.UTF8.GetString(uznData);
-            await System.IO.File.WriteAllTextAsync(uznFile, uznString);
-        }
-
-        string output = ProcessImage(path, ocrType, uznFile);
-
+        string tempFilePath = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
+        string uznFilePath = $"{tempFilePath}.uzn";
+        bool createdUZN = false;
         try
         {
-            System.IO.File.Delete(path);
-
-            if (System.IO.File.Exists(uznFile))
+            using (var fstream = new FileStream(tempFilePath, FileMode.Create))
             {
-                System.IO.File.Delete($"{path}.uzn");
+                await inputstream.CopyToAsync(fstream);
+                await fstream.FlushAsync();
             }
-        }
-        catch (Exception)
-        {
-            Console.Error.WriteLine($"Failed to delete temp file {path}");
-        }
 
-        return output;
+            if (!string.IsNullOrWhiteSpace(uzn))
+            {
+                byte[] uznData = Convert.FromBase64String(uzn);
+                string uznString = Encoding.UTF8.GetString(uznData);
+                await File.WriteAllTextAsync(uznFilePath, uznString);
+                createdUZN = true;
+            }
+
+            return ProcessImage(tempFilePath, ocrType, uznFilePath);
+        }
+        finally
+        {
+            File.Delete(tempFilePath);
+            if (createdUZN)
+                File.Delete(uznFilePath);
+        }
     }
 
     private string ProcessImage(string imagePath, string ocrType, string uznPath)
@@ -58,7 +54,10 @@ public class ImageProcessing
         }
 
         using var img = Pix.LoadFromFile(imagePath);
-        using var page = engine.Process(img);
+
+        using var preProcessedImage = ImagePreprocessor.Preprocess(img);
+
+        using var page = engine.Process(preProcessedImage);
 
         string ocrText;
         if (string.Equals("hocr", ocrType, StringComparison.InvariantCultureIgnoreCase))

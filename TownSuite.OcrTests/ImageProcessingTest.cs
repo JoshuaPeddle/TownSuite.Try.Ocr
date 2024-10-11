@@ -42,8 +42,8 @@ public class Tests
    <div class='ocr_carea' id='block_1_1' title=""bbox 27 38 99 48"">
     <p class='ocr_par' id='par_1_1' lang='eng' title=""bbox 27 38 99 48"">
      <span class='ocr_line' id='line_1_1' title=""bbox 27 38 99 48; baseline 0 0; x_size 20; x_descenders 5; x_ascenders 5"">
-      <span class='ocrx_word' id='word_1_1' title='bbox 27 29 59 57; x_wconf 94'>Hello</span>
-      <span class='ocrx_word' id='word_1_2' title='bbox 67 29 99 57; x_wconf 96'>World</span>
+      <span class='ocrx_word' id='word_1_1' title='bbox 27 29 59 57; x_wconf 68'>Hello</span>
+      <span class='ocrx_word' id='word_1_2' title='bbox 65 29 99 57; x_wconf 68'>World</span>
      </span>
     </p>
    </div>
